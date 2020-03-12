@@ -26,12 +26,14 @@ class ACAgent(BaseAgent):
         optimizer_fn = get_optimizer_func(args.opt_fn)()
         # policy net
         self.policy = get_policy_net(env, args)
+        print(self.policy)
         self.target_policy = get_policy_net(env, args)
         self.policy_opt = optimizer_fn(
             params=filter(lambda p: p.requires_grad, self.policy.parameters()),
             lr=self.policy.learning_rate)
         # value net
         self.value = get_value_net(env, args)
+        print(self.value)
         self.target_value = get_value_net(env, args)
         self.value_opt = optimizer_fn(
             params=filter(lambda p: p.requires_grad, self.value.parameters()),
